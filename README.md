@@ -43,11 +43,11 @@
 
 ### 👤 사용자 기능 (User)
 
-| 로그인 화면 | 예약 화면 |
+| 사용자 메인 화면 | 사용자 예약 화면 |
 |-------------|-----------|
-|  <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> | <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> |
-| 로그인 화면 |
-|  <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> | 
+|  <img src="src/main/resources/사용자메인화면.jpg" width="550"> | <img src="src/main/resources/사용자예약.jpg" width="550"> |
+| 사용자 공지사항 | 사용자 예약 조회 |
+|  <img src="src/main/resources/사용자공지사항.jpg" width="550"> |  <img src="src/main/resources/사용자예약.jpg" width="550"> |
 ---
 
 ### 🛠 관리자 기능 (Admin)
