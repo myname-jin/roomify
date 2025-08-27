@@ -44,25 +44,30 @@
 ### 👤 사용자 기능 (User)
 
 | 사용자 메인 화면 | 사용자 예약 화면 |
-|-------------|-----------|
-|  <img src="src/main/resources/사용자메인화면.jpg" width="550"> | <img src="src/main/resources/사용자예약.jpg" width="550"> |
-| 사용자 공지사항 | 사용자 예약 조회 |
-|  <img src="src/main/resources/사용자공지사항.jpg" width="550"> |  <img src="src/main/resources/사용자예약.jpg" width="550"> |
+|---------------|-------------|
+<table>
+<tr><td align="center"><img src="src/main/resources/관리자메인.jpg" width="550" alt="무박 2일 대회 참여" height="400"/><br>무박 2일 대회 참여</td>
+<td align="center"><img src="src/main/resources/관리자메인.jpg" width="550" alt="단체 기념 사진" height="400"/><br>단체 기념 사진</td></tr>
+<tr><td align="center"><img src="readmeimg/상장수여2.jpg" alt="시상식 전경" height="400"/><br>시상식</td>
+<td align="center"><img src="readmeimg/상장수여.jpg" alt="상장 수여" height="400"/><br>상장 수여</td></tr>
+</table>
+ > 👨‍💻 멘트추가하기
 ---
 
 ### 🛠 관리자 기능 (Admin)
 
-| 대시보드 | 예약 관리 | 강의실 관리 |
-|----------|-----------|-------------|
-| <img src="assets/admin_dashboard.png" width="250"> | <img src="assets/admin_manage_reservations.png" width="250"> | <img src="assets/admin_classroom.png" width="250"> |
+| 관리자 메인 화면 | 관리자 규칙 관리 |
+|---------------|-------------|
+|  <img src="src/main/resources/관리자메인.jpg" width="550"> | <img src="src/main/resources/관리자사용규칙.jpg" width="550"> |
+| 사용자 공지사항 | 사용자 예약 조회 |
+|  <img src="src/main/resources/사용자공지사항.jpg" width="550"> |  <img src="src/main/resources/사용자예약조회jpg.jpg" width="550"> |
+| 사용자 공지사항 | 사용자 예약 조회 |
+---
 
-| 통계 화면 | 공지사항 관리 | 예약 제한 |
-|-----------|--------------|-----------|
-| <img src="assets/admin_stats.png" width="250"> | <img src="assets/admin_notice.png" width="250"> | <img src="assets/admin_restriction.png" width="250"> |
 
-| 엑셀 연동 |   |   |
-|-----------|---|---|
-| <img src="assets/admin_excel.png" width="250"> |   |   |
+
+
+
 
 ---
 
