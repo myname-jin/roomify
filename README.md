@@ -4,10 +4,6 @@
 > **Java Swing + Socket** 프로젝트입니다. 파일 변경은 서버를 통해 **실시간 동기화**되며,  
 > 동시 접속은 **3명 제한 + 대기열(FIFO)** 로 관리됩니다.
 
-<p align="center">
-  <img src="assets/hero.png" width="850" alt="메인 흐름 개요(진입→동의→예약→관리)">
-</p>
-
 [![Java](https://img.shields.io/badge/Java-8%2B-orange)]()
 [![Swing](https://img.shields.io/badge/UI-Java%20Swing-blue)]()
 [![Sockets](https://img.shields.io/badge/Network-TCP%20Sockets-lightgrey)]()
@@ -39,11 +35,50 @@
 - 종료 시 세션 정리 후 대기자 자동 입장
 
 <p align="center">
-  <img src="assets/architecture.png" width="850" alt="아키텍처(클라이언트↔서버, MVC, 동기화 흐름)">
+  <img src="src/main/resources/서버-클라이언트구조.jpg" width="600" alt="아키텍처 다이어그램">
+</p>
+---
+
+## 📸 실행 화면
+
+### 👤 사용자 기능 (User)
+
+| 로그인 화면 | 예약 화면 |
+|-------------|-----------|
+|  <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> | <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> |
+| 로그인 화면 |
+|  <img src="src/main/resources/서버-클라이언트구조.jpg" width="550"> | 
+---
+
+### 🛠 관리자 기능 (Admin)
+
+| 대시보드 | 예약 관리 | 강의실 관리 |
+|----------|-----------|-------------|
+| <img src="assets/admin_dashboard.png" width="250"> | <img src="assets/admin_manage_reservations.png" width="250"> | <img src="assets/admin_classroom.png" width="250"> |
+
+| 통계 화면 | 공지사항 관리 | 예약 제한 |
+|-----------|--------------|-----------|
+| <img src="assets/admin_stats.png" width="250"> | <img src="assets/admin_notice.png" width="250"> | <img src="assets/admin_restriction.png" width="250"> |
+
+| 엑셀 연동 |   |   |
+|-----------|---|---|
+| <img src="assets/admin_excel.png" width="250"> |   |   |
+
+---
+
+### 📂 프로젝트 관리 시각화
+<p align="center">
+  <img src="src/main/resources/서버-클라이언트구조.jpg" width="650" alt="사용자 예약 화면">
 </p>
 
 ---
 
+### 🎬 세션 관리 데모 (GIF)
+<p align="center">
+  <img src="src/main/resources/서버-클라이언트구조.jpg" width="650" alt="사용자 예약 화면">
+</p>
+
+---
 ## 🧱 모듈 구조 (주요 클래스 맵)
 
 ### 1) 인증 & 연결
