@@ -1,70 +1,113 @@
-[깃_브랜치_전략.pdf](https://github.com/user-attachments/files/20074717/_._.pdf)
+# 🖥️ Java Socket 기반 교실 예약 & 파일 동기화 시스템
 
-https://richone.tistory.com/26 좋은 커밋 메시지 적용
+> **외부IP연결 → 로그인/회원가입 → 규칙 동의 → 사용자/관리자 예약 관리 → 알림/통계** 까지 한 번에 제공하는  
+> **Java Swing + Socket** 프로젝트입니다. 파일 변경은 서버를 통해 **실시간 동기화**되며,  
+> 동시 접속은 **3명 제한 + 대기열(FIFO)** 로 관리됩니다.
 
-# Roomify — Classroom & Lab Reservation System
+<p align="center">
+  <img src="assets/hero.png" width="850" alt="메인 흐름 개요(진입→동의→예약→관리)">
+</p>
 
-**Roomify**는 대학교 **강의실/실습실 예약 관리**를 위한 프로그램으로, 학생과 교직원이 편리하게 예약하고 관리할 수 있도록 개발된 팀 프로젝트입니다.  
-본 저장소는 팀프로젝트를 기반으로 하되, 제가 맡은 주요 기여 부분을 중심으로 정리한 **개인 포트폴리오 버전**입니다.
-
----
-
-## 📌 프로젝트 개요
-- **목표**: 강의실 및 실습실 예약을 효율적으로 관리할 수 있는 시스템 구축
-- **주요 기능**:
-  1. 강의실/실습실 예약 및 취소
-  2. 예약 현황 조회 및 시각화
-  3. 사용자 권한 구분 (관리자 / 학생 / 교수)
-  4. 예약 충돌 방지 및 대기열 관리
-  5. 로그 기록 및 알림 기능
+[![Java](https://img.shields.io/badge/Java-8%2B-orange)]()
+[![Swing](https://img.shields.io/badge/UI-Java%20Swing-blue)]()
+[![Sockets](https://img.shields.io/badge/Network-TCP%20Sockets-lightgrey)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#-license)
 
 ---
 
-## 🧑‍🤝‍🧑 팀 구성
-- 총 인원: 4명
-- 제 역할: **서버-클라이언트 통신, 예약 로직, 동시성 제어, UI 일부**
+## ✨ 주요 기능 (Overview)
+
+1) **인증 & 연결**
+- 서버 IP/PORT 입력 후 연결
+- 회원가입 및 로그인
+- 사용자 유형(관리자/교수,학생)별 진입점 제공
+
+2) **규칙 동의 & 관리**
+- 로그인 직후 약관/규칙 동의 화면
+- 관리자가 규칙 항목 등록·수정 가능
+
+3) **예약 시스템 (사용자 + 관리자)**
+- 사용자: 교실/시간 선택, 예약 생성/조회/취소, 알림
+- 관리자: 예약 전체 현황 관리(검색/수정/삭제), <BR>예약 승인 및 거절기능,
+          강의실 정보 수정기능,  예약 시각화, 공지사항 수정,
+          일부 계정 예약 제한기능, 예약 취소관리(취소사유등)
+- 달력/다이얼로그 기반 UI 제공
+
+4) **파일 동기화 & 세션 관리**
+- 파일 변경 감지 → 서버 반영 → 다른 클라이언트에 실시간 전파
+- 동시 접속 3명 제한, 초과 시 대기열(FIFO) 관리
+- 종료 시 세션 정리 후 대기자 자동 입장
+
+<p align="center">
+  <img src="assets/architecture.png" width="850" alt="아키텍처(클라이언트↔서버, MVC, 동기화 흐름)">
+</p>
 
 ---
 
-## 🎯 나의 기여
-- **예약 서비스 로직 구현**
-  - 예약 요청/취소 기능 및 충돌 방지 로직 개발
-  - 동시 접속자 3명 제한 + 대기열 처리 기능
-- **서버-클라이언트 구조**
-  - Java Socket 기반 서버/클라이언트 구현
-  - 로그인/로그아웃 및 세션 관리
-- **UI 개발 (Java Swing)**
-  - 예약 현황 차트, 테이블 뷰
-  - 사용자 타입별 화면 분리 (관리자 / 일반 사용자)
-- **파일 동기화**
-  - 예약 데이터 파일 실시간 반영
-  - 클라이언트 간 예약 현황 자동 업데이트
+## 🧱 모듈 구조 (주요 클래스 맵)
 
-👉 제가 작성/수정한 주요 코드:
-- `src/controller/ReservationController.java`
-- `src/view/ReservationView.java`
-- `src/server/ServerMain.java`
-- `src/server/ClientHandler.java`
+### 1) 인증 & 연결
+- `Main` (프로그램 시작)
+- `ConnectView` (서버 IP/포트 입력 화면)
+- `LoginController`, `LoginModel`, `LoginService`, `LoginView`
+- `SignupController`, `SignupModel`, `SignupView`
+
+### 2) 규칙(약관) 동의/관리 (MVC)
+- `RuleAgreementController`, `RuleAgreementModel`, `RuleAgreementView`
+- `RuleManagementController`, `RuleManagementModel`, `RuleManagementView`
+
+### 3) 예약 시스템 (MVC)
+- 공용/UI
+  - `UserMainController`, `UserMainModel`, `UserMainView` (사용자 대시보드)
+  - `ReservationController`, `ReservationModel` (핵심 로직)
+  - `ReservationGUIController`, `ReservationView`, `ConsoleView`
+  - `MainView`, `DetailView` (예약 목록/상세)
+  - 달력 & 선택 다이얼로그:  
+    `CalendarController`, `CalendarView`, `DialogController`,  
+    `RoomTypeDialogView`, `RoomNumberDialogView`, `TimeSlotDialogView`, `BlockTypeDialogView`
+- 사용자 기능
+  - `UserReservationListController`, `UserReservationModel`, `UserReservationListView`
+  - `UserReservationCancelController`, `UserReservationCancelModel`, `UserReservationCancelView`
+  - `UserNoticeController`, `UserNoticeModel`, `UserNoticeView` (알림)
+  - `UserStatsController`, `UserStatsModel`, `UserStatsView` (통계)
+  - `CheckinDialog` (체크인/확인 다이얼로그)
+- 관리자 기능
+  - `ReservationMgmtController`, `ReservationMgmtModel`, `ReservationMgmtDataModel`, `ReservationMgmtView`
+  - 교실 관리: `ClassroomController`, `ClassroomModel`, `ClassroomView`, `RoomModel`
+  - (옵션) 엑셀 로드: `ExcelLoader` ※ `.xlsx` 사용 시 Apache POI 필요 가능
+
+### 4) 동기화 & 세션
+- `FileSyncClient`, `FileWatcher`, `SocketManager`, `LogoutUtil`
+- 알림 UI 버튼: `NotificationButton`
+- 알림 MVC: `NotificationController`, `NotificationModel`, `NotificationView`
 
 ---
 
-## 🖼️ 결과 화면
-| 메인 화면 | 예약 확인 |
-|-----------|-----------|
-| ![main](./images/main.png) | ![schedule](./images/schedule.png) |
+## 🧭 사용자 플로우
+
+1. **서버 연결**: `ConnectView`에서 IP/PORT 입력 → 연결  
+2. **로그인/회원가입**: `LoginView / SignupView`에서 진행  
+3. **규칙 동의**: `RuleAgreementView` 체크 완료 → 사용자 메인(`UserMainView`)  
+4. **예약**: 달력/다이얼로그로 조건 선택 → 생성/조회/수정/취소  
+5. **알림/통계**: 변경 알림 확인, 본인 예약 통계 확인  
+6. (관리자) **예약 전체·교실·엑셀 관리**: `ReservationMgmtView`, `ClassroomView` 등
+
+<p align="center">
+  <img src="assets/flow.png" width="850" alt="사용자 흐름도(연결→인증→동의→예약→알림/통계)">
+</p>
 
 ---
 
 ## 🛠 기술 스택
-- **Language**: Java (JDK 17)
-- **Framework/UI**: Swing (MVC 패턴 적용)
-- **Network**: Java Socket
-- **Database/Storage**: 텍스트 파일 기반 저장 (향후 DB 연동 확장 가능)
-- **Version Control**: Git, GitHub
 
----
+- **Language/UI**: Java 8+ / **Swing** (일부 `.form` → NetBeans GUI Builder 기반)
+- **Network**: **TCP Socket** (클라이언트–서버), ACK 기반 동기화
+- **Pattern**: **MVC 분리** (Controller ↔ Model ↔ View)
+- **Optional**: Excel 연동 시 **Apache POI** (`poi`, `poi-ooxml`)
 
-# 클라이언트 실행
-cd src/client
-java ClientMain
-
+```text
+핵심 설계 포인트
+- TCP 소켓 통신
+- Per-connection 워커 스레드(서버 측 가정), 이벤트 드리븐 UI(클라이언트)
+- 세션 제한(동시 3명) + FIFO 대기열 + 자동 입장
+- 파일 동기화(서버 반영 + ACK 전파)
