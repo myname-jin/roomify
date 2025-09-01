@@ -4,6 +4,10 @@
 > **Java Swing + Socket 기반** 프로젝트입니다.  
 > 파일 변경은 서버를 통해 **실시간 동기화**되며, 동시 접속은 **3명 제한 + 대기열(FIFO)** 로 관리됩니다.  
 
+## 🌐 관련 프로젝트
+- 💻 **Client (Roomify)** : 현재 저장소  
+- 🖥️ **Server** : [myname-jin/SERVER](https://github.com/myname-jin/SERVER)
+
 ---
 
 ## 📑 발표 자료
@@ -132,6 +136,7 @@
 - **Language/UI**: Java 8+ / **Swing** (일부 `.form` → NetBeans GUI Builder 기반)
 - **Network**: **TCP Socket** (클라이언트–서버), ACK 기반 동기화
 - **Pattern**: **MVC 분리** (Controller ↔ Model ↔ View)
+  
 [![Java](https://img.shields.io/badge/Java-8%2B-orange?logo=java)]()
 [![Swing](https://img.shields.io/badge/UI-Java%20Swing-blue?logo=java)]()
 [![Sockets](https://img.shields.io/badge/Network-TCP%20Sockets-lightgrey?logo=socket.io)]()
