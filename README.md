@@ -1,13 +1,13 @@
 # 🖥️ Java Socket 기반 교실 예약 & 파일 동기화 시스템
 
-> **외부IP연결 → 로그인/회원가입 → 규칙 동의 → 사용자/관리자 예약 관리 → 알림/통계** 까지 한 번에 제공하는  
-> **Java Swing + Socket** 프로젝트입니다. 파일 변경은 서버를 통해 **실시간 동기화**되며,  
-> 동시 접속은 **3명 제한 + 대기열(FIFO)** 로 관리됩니다.
+> **외부 IP 연결 → 로그인/회원가입 → 규칙 동의 → 사용자/관리자 예약 관리 → 알림/통계**까지 한 번에 제공하는  
+> **Java Swing + Socket 기반** 프로젝트입니다.  
+> 파일 변경은 서버를 통해 **실시간 동기화**되며, 동시 접속은 **3명 제한 + 대기열(FIFO)** 로 관리됩니다.  
 
-[![Java](https://img.shields.io/badge/Java-8%2B-orange)]()
-[![Swing](https://img.shields.io/badge/UI-Java%20Swing-blue)]()
-[![Sockets](https://img.shields.io/badge/Network-TCP%20Sockets-lightgrey)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#-license)
+---
+
+## 📑 발표 자료
+➡️ [**발표PPT 다운로드**](https://raw.githubusercontent.com/myname-jin/roomify/develop/2%EB%B6%84%EB%B0%98%203%EC%A1%B0-%EB%B0%9C%ED%91%9C.pptx)
 
 ---
 
@@ -127,31 +127,18 @@
 
 ---
 
-## 🧭 사용자 플로우
-
-1. **서버 연결**: `ConnectView`에서 IP/PORT 입력 → 연결  
-2. **로그인/회원가입**: `LoginView / SignupView`에서 진행  
-3. **규칙 동의**: `RuleAgreementView` 체크 완료 → 사용자 메인(`UserMainView`)  
-4. **예약**: 달력/다이얼로그로 조건 선택 → 생성/조회/수정/취소  
-5. **알림/통계**: 변경 알림 확인, 본인 예약 통계 확인  
-6. (관리자) **예약 전체·교실·엑셀 관리**: `ReservationMgmtView`, `ClassroomView` 등
-
-<p align="center">
-  <img src="assets/flow.png" width="850" alt="사용자 흐름도(연결→인증→동의→예약→알림/통계)">
-</p>
-
----
-
 ## 🛠 기술 스택
 
 - **Language/UI**: Java 8+ / **Swing** (일부 `.form` → NetBeans GUI Builder 기반)
 - **Network**: **TCP Socket** (클라이언트–서버), ACK 기반 동기화
 - **Pattern**: **MVC 분리** (Controller ↔ Model ↔ View)
-- **Optional**: Excel 연동 시 **Apache POI** (`poi`, `poi-ooxml`)
+[![Java](https://img.shields.io/badge/Java-8%2B-orange?logo=java)]()
+[![Swing](https://img.shields.io/badge/UI-Java%20Swing-blue?logo=java)]()
+[![Sockets](https://img.shields.io/badge/Network-TCP%20Sockets-lightgrey?logo=socket.io)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#-license)
 
 ```text
 핵심 설계 포인트
 - TCP 소켓 통신
-- Per-connection 워커 스레드(서버 측 가정), 이벤트 드리븐 UI(클라이언트)
 - 세션 제한(동시 3명) + FIFO 대기열 + 자동 입장
 - 파일 동기화(서버 반영 + ACK 전파)
